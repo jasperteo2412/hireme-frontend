@@ -19,4 +19,8 @@ export class PaymentService {
   saveSucessfulPayment(sessionId: string): Observable<any> {
     return this.http.put(`${this.resourceUrl}/save/${sessionId}`, null, { observe: 'response' });
   }
+
+  getAllPastPayments(userId?: string): Observable<any> {
+    return this.http.get(`${this.resourceUrl}/history/${userId}`, { observe: 'response' });
+  }
 }
