@@ -1,0 +1,336 @@
+/* @import 'bootstrap-variables';
+@import 'bootstrap/scss/bootstrap'; */
+
+body {
+  background: #fafafa;
+  margin: 0;
+}
+a {
+  color: #533f03;
+  font-weight: bold;
+}
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:after,
+*::before {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.app-container {
+  box-sizing: border-box;
+}
+.app-container .view-container {
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+.app-container .view-container .card {
+  padding: 1rem;
+}
+.app-container .view-container .view-routes {
+  height: 100%;
+}
+.app-container .view-container .view-routes > div {
+  height: 100%;
+}
+.fullscreen {
+  position: fixed;
+  top: 100px;
+  left: 0px;
+  width: 99% !important;
+  height: calc(100vh - 110px) !important;
+  margin: 5px;
+  z-index: 1000;
+  padding: 5px 25px 50px 25px !important;
+}
+/* ========================================================================== Browser Upgrade Prompt ========================================================================== */
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+/* ========================================================================== Custom button styles ========================================================================== */
+.icon-button > .btn {
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0.5rem;
+  line-height: 1rem;
+}
+.icon-button > .btn:hover {
+  background-color: transparent;
+  border-color: transparent;
+}
+.icon-button > .btn:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* ========================================================================== Generic styles ========================================================================== */
+/* Temporary workaround for availity-reactstrap-validation */
+.invalid-feedback {
+  display: inline;
+}
+/* other generic styles */
+.title {
+  font-size: 1.25em;
+  margin: 1px 10px 1px 10px;
+}
+.description {
+  font-size: 0.9em;
+  margin: 1px 10px 1px 10px;
+}
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  border-radius: 2px;
+}
+.error {
+  color: white;
+  background-color: red;
+}
+.break {
+  white-space: normal;
+  word-break: break-all;
+}
+.break-word {
+  white-space: normal;
+  word-break: keep-all;
+}
+.preserve-space {
+  white-space: pre-wrap;
+}
+/* padding helpers */
+.pad {
+  padding: 10px !important;
+}
+.pad-2 {
+  padding: 2px !important;
+}
+.pad-3 {
+  padding: 3px !important;
+}
+.pad-5 {
+  padding: 5px !important;
+}
+.pad-10 {
+  padding: 10px !important;
+}
+.pad-20 {
+  padding: 20px !important;
+}
+.pad-25 {
+  padding: 25px !important;
+}
+.pad-30 {
+  padding: 30px !important;
+}
+.pad-50 {
+  padding: 50px !important;
+}
+.pad-75 {
+  padding: 75px !important;
+}
+.pad-100 {
+  padding: 100px !important;
+}
+.pad-top-4 {
+  padding-top: 4px !important;
+}
+.pad-top-5 {
+  padding-top: 5px !important;
+}
+.pad-top-10 {
+  padding-top: 10px !important;
+}
+.pad-top-20 {
+  padding-top: 20px !important;
+}
+.pad-top-25 {
+  padding-top: 25px !important;
+}
+.pad-top-30 {
+  padding-top: 30px !important;
+}
+.pad-top-50 {
+  padding-top: 50px !important;
+}
+.pad-top-75 {
+  padding-top: 75px !important;
+}
+.pad-top-100 {
+  padding-top: 100px !important;
+}
+.pad-bottom-4 {
+  padding-bottom: 4px !important;
+}
+.pad-bottom-5 {
+  padding-bottom: 5px !important;
+}
+.pad-bottom-10 {
+  padding-bottom: 10px !important;
+}
+.pad-bottom-20 {
+  padding-bottom: 20px !important;
+}
+.pad-bottom-25 {
+  padding-bottom: 25px !important;
+}
+.pad-bottom-30 {
+  padding-bottom: 30px !important;
+}
+.pad-bottom-50 {
+  padding-bottom: 50px !important;
+}
+.pad-bottom-75 {
+  padding-bottom: 75px !important;
+}
+.pad-bottom-100 {
+  padding-bottom: 100px !important;
+}
+.pad-right-5 {
+  padding-right: 5px !important;
+}
+.pad-right-10 {
+  padding-right: 10px !important;
+}
+.pad-right-20 {
+  padding-right: 20px !important;
+}
+.pad-right-25 {
+  padding-right: 25px !important;
+}
+.pad-right-30 {
+  padding-right: 30px !important;
+}
+.pad-right-50 {
+  padding-right: 50px !important;
+}
+.pad-right-75 {
+  padding-right: 75px !important;
+}
+.pad-right-100 {
+  padding-right: 100px !important;
+}
+.pad-left-5 {
+  padding-left: 5px !important;
+}
+.pad-left-10 {
+  padding-left: 10px !important;
+}
+.pad-left-20 {
+  padding-left: 20px !important;
+}
+.pad-left-25 {
+  padding-left: 25px !important;
+}
+.pad-left-30 {
+  padding-left: 30px !important;
+}
+.pad-left-50 {
+  padding-left: 50px !important;
+}
+.pad-left-75 {
+  padding-left: 75px !important;
+}
+.pad-left-100 {
+  padding-left: 100px !important;
+}
+.no-padding-left {
+  padding-left: 0 !important;
+}
+.no-padding-right {
+  padding-right: 0 !important;
+}
+.no-padding-top {
+  padding-top: 0 !important;
+}
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
+/* end of padding helpers */
+.no-margin {
+  margin: 0px;
+}
+.voffset {
+  margin-top: 2px !important;
+}
+.voffset-5 {
+  margin-top: 5px !important;
+}
+.voffset-10 {
+  margin-top: 10px !important;
+}
+.voffset-15 {
+  margin-top: 15px !important;
+}
+.voffset-30 {
+  margin-top: 30px !important;
+}
+.voffset-40 {
+  margin-top: 40px !important;
+}
+.voffset-60 {
+  margin-top: 60px !important;
+}
+.voffset-80 {
+  margin-top: 80px !important;
+}
+.voffset-100 {
+  margin-top: 100px !important;
+}
+.voffset-150 {
+  margin-top: 150px !important;
+}
+.readonly {
+  background-color: #eee;
+  opacity: 1;
+}
+/* ========================================================================== make sure browsers use the pointer cursor for anchors, even with no href ========================================================================== */
+a:hover {
+  cursor: pointer;
+}
+.hand {
+  cursor: pointer;
+}
+button.anchor-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  align-items: initial;
+  text-align: initial;
+  width: 100%;
+}
+a.anchor-btn:hover {
+  text-decoration: none;
+}
+/* ========================================================================== Metrics and Health styles ========================================================================== */
+#threadDump .popover,
+#healthCheck .popover {
+  top: inherit;
+  display: block;
+  font-size: 10px;
+  max-width: 1024px;
+}
+.thread-dump-modal-lock {
+  max-width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#healthCheck .popover {
+  margin-left: -50px;
+}
+.health-details {
+  min-width: 400px;
+}
+/* bootstrap 3 input-group 100% width http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
+.width-min {
+  width: 1% !important;
+}
+/* jhipster-needle-scss-add-main JHipster will add new css style */

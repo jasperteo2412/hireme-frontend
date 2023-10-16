@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="48" failures="0" errors="0" time="6.228">
+  <testsuite name="src\utils\__tests__\dateFormatter.test.tsx" errors="0" failures="0" skipped="0" timestamp="2023-05-18T04:26:09" time="1.535" tests="6">
+    <testcase classname="date formatter day + month &lt; 2" name="date formatter day + month &lt; 2" time="0.003">
+    </testcase>
+    <testcase classname="date formatter empty date " name="date formatter empty date " time="0.001">
+    </testcase>
+    <testcase classname="date formatter date month formatter" name="date formatter date month formatter" time="0">
+    </testcase>
+    <testcase classname="date formatter empty date time formatter " name="date formatter empty date time formatter " time="0">
+    </testcase>
+    <testcase classname="date formatter date time formatter" name="date formatter date time formatter" time="0.001">
+    </testcase>
+    <testcase classname="date formatter get time" name="date formatter get time" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="src\utils\__tests__\nricChecksum.test.tsx" errors="0" failures="0" skipped="0" timestamp="2023-05-18T04:26:09" time="1.636" tests="42">
+    <testcase classname="nric Checksum null" name="nric Checksum null" time="0.005">
+    </testcase>
+    <testcase classname="nric Checksum length != 9" name="nric Checksum length != 9" time="0">
+    </testcase>
+    <testcase classname="nric Checksum digit test 1" name="nric Checksum digit test 1" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum digit test 2" name="nric Checksum digit test 2" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S" name="nric Checksum nric S" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric S J" name="nric Checksum nric S J" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S Z" name="nric Checksum nric S Z" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric S I" name="nric Checksum nric S I" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S H" name="nric Checksum nric S H" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric S G" name="nric Checksum nric S G" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S F" name="nric Checksum nric S F" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S E" name="nric Checksum nric S E" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric S D" name="nric Checksum nric S D" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S C" name="nric Checksum nric S C" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S B" name="nric Checksum nric S B" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric S A" name="nric Checksum nric S A" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric T" name="nric Checksum nric T" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F" name="nric Checksum nric F" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric F X" name="nric Checksum nric F X" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F W" name="nric Checksum nric F W" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric F U" name="nric Checksum nric F U" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F T" name="nric Checksum nric F T" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F R" name="nric Checksum nric F R" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric F Q" name="nric Checksum nric F Q" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F P" name="nric Checksum nric F P" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F N" name="nric Checksum nric F N" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F M" name="nric Checksum nric F M" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric F L" name="nric Checksum nric F L" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric F K" name="nric Checksum nric F K" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric M" name="nric Checksum nric M" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M X" name="nric Checksum nric M X" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M W" name="nric Checksum nric M W" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric M U" name="nric Checksum nric M U" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M T" name="nric Checksum nric M T" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M R" name="nric Checksum nric M R" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric M Q" name="nric Checksum nric M Q" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M P" name="nric Checksum nric M P" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M N" name="nric Checksum nric M N" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M J" name="nric Checksum nric M J" time="0.001">
+    </testcase>
+    <testcase classname="nric Checksum nric M L" name="nric Checksum nric M L" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric M K" name="nric Checksum nric M K" time="0">
+    </testcase>
+    <testcase classname="nric Checksum nric other" name="nric Checksum nric other" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>
