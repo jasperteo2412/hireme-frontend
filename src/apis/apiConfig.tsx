@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import axios from "axios";
 
 const envValue: any = process.env.NODE_ENV;
 
