@@ -53,10 +53,7 @@ export const apis = () => {
 
         // CHANGE TO AWS LINK
         const userCommunication_URL = "http://user-communication-spring.ap-southeast-1.elasticbeanstalk.com"
-        const assignmentPaymentRecommendation_URL = ""
-
-        const assignmentPaymentRecommendation = "8081"
-        const userCommunication = "8083"
+        const assignmentPaymentRecommendation_URL = "http://payment-recommendation-assignment.ap-southeast-1.elasticbeanstalk.com/"
 
         // ASSIGNMENT
         const ASSIGNMENT_URL = "/assignments";
