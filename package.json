@@ -7,8 +7,8 @@
   "scripts": {
     "start": "npm run build && npm run start:prod",
     "start:local": "webpack serve --config webpack/webpack.dev.js --port 9000",
-    "start:prod": "node build/server.js",
-    "start:qa": "webpack serve --config webpack/webpack.prod.js",
+    "start:qa": "node build/server.js",
+    "start:prod": "webpack serve --config webpack/webpack.prod.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "build:prod": "webpack --config webpack/webpack.prod.js",
     "test": "jest",
