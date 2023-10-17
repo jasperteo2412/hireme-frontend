@@ -18,7 +18,7 @@
     "lint:fix": "eslint . --fix",
     "format:mac": "prettier --write 'src/**/*.{ts,tsx,css,json,js,jsx,less}'",
     "format:window": "prettier --write src/**/*.{ts,tsx,css,json,js,jsx,less}",
-    "prepare": "npm install"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -92,7 +92,8 @@
     "webpack-dev-server": "4.15.1",
     "webpack-merge": "5.9.0",
     "webpack-notifier": "1.15.0",
-    "workbox-webpack-plugin": "7.0.0"
+    "workbox-webpack-plugin": "7.0.0",
+    "husky": "^8.0.0"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
