@@ -1,168 +1,95 @@
 /* eslint-disable no-console */
 
-// const envValue: any = process.env.NODE_ENV;
+const envValue: any = process.env.NODE_ENV;
 
 export const apis = () => {
-  const loggedUser = sessionStorage.getItem('USER-ID');
 
-  //   console.log('envValue: ', envValue);
+    const loggedUser = sessionStorage.getItem("USER-ID");
 
-  //   if (envValue === 'DEVELOPMENT') {
-  //     const BASE_URL = 'http://localhost:';
+    console.log("envValue: ", envValue);
 
-  //     const assignmentPaymentRecommendation = '8081';
-  //     const userCommunication = '8083';
+    if(envValue === 'DEVELOPMENT'){
 
-  //     // ASSIGNMENT
-  //     const ASSIGNMENT_URL = '/assignments';
+        const BASE_URL = "http://localhost:"
 
-  //     // COMMUNICATION
-  //     const COMMUNICATION_URL = '/v1/messages';
-  //     const COMMUNICATION_CHECK_URL = '/v1/messages/check';
+        const assignmentPaymentRecommendation = "8081"
+        const userCommunication = "8083"
 
-  //     // PAYMENTS
-  //     const PAYMENTS_URL = '/payments';
+        // ASSIGNMENT
+        const ASSIGNMENT_URL = "/assignments";
 
-  //     // RECOMMENDATIONS
-  //     const RECOMMENDATIONS_URL = '/recommendations' + ASSIGNMENT_URL;
+        // COMMUNICATION
+        const COMMUNICATION_URL = "/v1/messages";
+        const COMMUNICATION_CHECK_URL = "/v1/messages/check";
 
-  //     //USER
-  //     const USER_SIGN_IN_URL = '/api/auth/signin';
-  //     const USER_SIGN_UP_URL = '/api/auth/signup';
+        // PAYMENTS
+        const PAYMENTS_URL = "/payments";
 
-  //     const API = {
-  //       assignmentUrl: BASE_URL + assignmentPaymentRecommendation + ASSIGNMENT_URL,
-  //       communicationUrl: BASE_URL + userCommunication + COMMUNICATION_URL,
-  //       communicationCheckUrl: BASE_URL + userCommunication + COMMUNICATION_CHECK_URL,
-  //       paymentsUrl: BASE_URL + assignmentPaymentRecommendation + PAYMENTS_URL,
-  //       recommendationsUrl: BASE_URL + assignmentPaymentRecommendation + RECOMMENDATIONS_URL,
-  //       userSignInUrl: BASE_URL + userCommunication + USER_SIGN_IN_URL,
-  //       userSignUpUrl: BASE_URL + userCommunication + USER_SIGN_UP_URL,
-  //     };
+        // RECOMMENDATIONS
+        const RECOMMENDATIONS_URL = "/recommendations"+ASSIGNMENT_URL;
 
-  //     const APIHeaders = {
-  //       'USER-ID': loggedUser,
-  //     };
+        //USER
+        const USER_SIGN_IN_URL = "/api/auth/signin";
+        const USER_SIGN_UP_URL = "/api/auth/signup";
 
-  //     return { API, APIHeaders };
-  //   } else if (envValue === 'PRODUCTION') {
-  //     // CHANGE TO AWS LINK
-  //     const userCommunication_URL = 'http://user-communication-spring.ap-southeast-1.elasticbeanstalk.com';
-  //     const assignmentPaymentRecommendation_URL = '';
+        const API = {
+            assignmentUrl: BASE_URL+assignmentPaymentRecommendation+ASSIGNMENT_URL,
+            communicationUrl: BASE_URL+userCommunication+COMMUNICATION_URL,
+            communicationCheckUrl: BASE_URL+userCommunication+COMMUNICATION_CHECK_URL,
+            paymentsUrl: BASE_URL+assignmentPaymentRecommendation+PAYMENTS_URL,
+            recommendationsUrl: BASE_URL+assignmentPaymentRecommendation+RECOMMENDATIONS_URL,
+            userSignInUrl: BASE_URL+userCommunication+USER_SIGN_IN_URL,
+            userSignUpUrl: BASE_URL+userCommunication+USER_SIGN_UP_URL,
 
-  //     const assignmentPaymentRecommendation = '8081';
-  //     const userCommunication = '8083';
+        }
+        
+        const APIHeaders = {
+            'USER-ID': loggedUser
+        }
 
-  //     // ASSIGNMENT
-  //     const ASSIGNMENT_URL = '/assignments';
+        return { API, APIHeaders };
+    }
+    else if(envValue === 'PRODUCTION'){
 
-  //     // COMMUNICATION
-  //     const COMMUNICATION_URL = '/v1/messages';
-  //     const COMMUNICATION_CHECK_URL = '/v1/messages/check';
+        // CHANGE TO AWS LINK
+        const userCommunication_URL = "http://user-communication-spring.ap-southeast-1.elasticbeanstalk.com"
+        const assignmentPaymentRecommendation_URL = ""
 
-  //     // PAYMENTS
-  //     const PAYMENTS_URL = '/payments';
+        const assignmentPaymentRecommendation = "8081"
+        const userCommunication = "8083"
 
-  //     // RECOMMENDATIONS
-  //     const RECOMMENDATIONS_URL = '/recommendations' + ASSIGNMENT_URL;
+        // ASSIGNMENT
+        const ASSIGNMENT_URL = "/assignments";
 
-  //     //USER
-  //     const USER_SIGN_IN_URL = '/api/auth/signin';
-  //     const USER_SIGN_UP_URL = '/api/auth/signup';
+        // COMMUNICATION
+        const COMMUNICATION_URL = "/v1/messages";
+        const COMMUNICATION_CHECK_URL = "/v1/messages/check";
 
-  //     // For testing messaging
-  //     const APIHeaders = {
-  //       'USER-ID': loggedUser,
-  //     };
+        // PAYMENTS
+        const PAYMENTS_URL = "/payments";
 
-  //     const API = {
-  //       assignmentUrl: assignmentPaymentRecommendation_URL + ASSIGNMENT_URL,
-  //       communicationUrl: userCommunication_URL + COMMUNICATION_URL,
-  //       communicationCheckUrl: userCommunication_URL + COMMUNICATION_CHECK_URL,
-  //       paymentsUrl: assignmentPaymentRecommendation_URL + PAYMENTS_URL,
-  //       recommendationsUrl: assignmentPaymentRecommendation_URL + RECOMMENDATIONS_URL,
-  //       userSignInUrl: userCommunication_URL + USER_SIGN_IN_URL,
-  //       userSignUpUrl: userCommunication_URL + USER_SIGN_UP_URL,
-  //     };
+        // RECOMMENDATIONS
+        const RECOMMENDATIONS_URL = "/recommendations"+ASSIGNMENT_URL;
 
-  //     return { API, APIHeaders };
-  //   }
+        //USER
+        const USER_SIGN_IN_URL = "/api/auth/signin";
+        const USER_SIGN_UP_URL = "/api/auth/signup";
 
-  // FOR LOCAL DEVELOPMENT
-  //   const BASE_URL = 'http://localhost:';
+        // For testing messaging
+        const APIHeaders = {
+            'USER-ID': loggedUser
+        }
 
-  //   const assignmentPaymentRecommendation = '8081';
-  //   const userCommunication = '8083';
+        const API = {
+            assignmentUrl: assignmentPaymentRecommendation_URL+ASSIGNMENT_URL,
+            communicationUrl: userCommunication_URL+COMMUNICATION_URL,
+            communicationCheckUrl: userCommunication_URL+COMMUNICATION_CHECK_URL,
+            paymentsUrl: assignmentPaymentRecommendation_URL+PAYMENTS_URL,
+            recommendationsUrl: assignmentPaymentRecommendation_URL+RECOMMENDATIONS_URL,
+            userSignInUrl: userCommunication_URL+USER_SIGN_IN_URL,
+            userSignUpUrl: userCommunication_URL+USER_SIGN_UP_URL,
+        }
 
-  //   // ASSIGNMENT
-  //   const ASSIGNMENT_URL = '/assignments';
-
-  //   // COMMUNICATION
-  //   const COMMUNICATION_URL = '/v1/messages';
-  //   const COMMUNICATION_CHECK_URL = '/v1/messages/check';
-
-  //   // PAYMENTS
-  //   const PAYMENTS_URL = '/payments';
-
-  //   // RECOMMENDATIONS
-  //   const RECOMMENDATIONS_URL = '/recommendations' + ASSIGNMENT_URL;
-
-  //   //USER
-  //   const USER_SIGN_IN_URL = '/api/auth/signin';
-  //   const USER_SIGN_UP_URL = '/api/auth/signup';
-
-  //   const API = {
-  //     assignmentUrl: BASE_URL + assignmentPaymentRecommendation + ASSIGNMENT_URL,
-  //     communicationUrl: BASE_URL + userCommunication + COMMUNICATION_URL,
-  //     communicationCheckUrl: BASE_URL + userCommunication + COMMUNICATION_CHECK_URL,
-  //     paymentsUrl: BASE_URL + assignmentPaymentRecommendation + PAYMENTS_URL,
-  //     recommendationsUrl: BASE_URL + assignmentPaymentRecommendation + RECOMMENDATIONS_URL,
-  //     userSignInUrl: BASE_URL + userCommunication + USER_SIGN_IN_URL,
-  //     userSignUpUrl: BASE_URL + userCommunication + USER_SIGN_UP_URL,
-  //   };
-
-  //   const APIHeaders = {
-  //     'USER-ID': loggedUser,
-  //   };
-
-  //   return { API, APIHeaders };
-
-  // FOR LOCAL DEPLOYMENT
-  // CHANGE TO AWS LINK
-  const userCommunication_URL = 'http://user-communication-spring.ap-southeast-1.elasticbeanstalk.com';
-  const assignmentPaymentRecommendation_URL = '';
-
-  // ASSIGNMENT
-  const ASSIGNMENT_URL = '/assignments';
-
-  // COMMUNICATION
-  const COMMUNICATION_URL = '/v1/messages';
-  const COMMUNICATION_CHECK_URL = '/v1/messages/check';
-
-  // PAYMENTS
-  const PAYMENTS_URL = '/payments';
-
-  // RECOMMENDATIONS
-  const RECOMMENDATIONS_URL = '/recommendations' + ASSIGNMENT_URL;
-
-  //USER
-  const USER_SIGN_IN_URL = '/api/auth/signin';
-  const USER_SIGN_UP_URL = '/api/auth/signup';
-
-  // For testing messaging
-  const APIHeaders = {
-    'USER-ID': loggedUser,
-  };
-
-  const API = {
-    assignmentUrl: assignmentPaymentRecommendation_URL + ASSIGNMENT_URL,
-    communicationUrl: userCommunication_URL + COMMUNICATION_URL,
-    communicationCheckUrl: userCommunication_URL + COMMUNICATION_CHECK_URL,
-    paymentsUrl: assignmentPaymentRecommendation_URL + PAYMENTS_URL,
-    recommendationsUrl: assignmentPaymentRecommendation_URL + RECOMMENDATIONS_URL,
-    userSignInUrl: userCommunication_URL + USER_SIGN_IN_URL,
-    userSignUpUrl: userCommunication_URL + USER_SIGN_UP_URL,
-  };
-
-  return { API, APIHeaders };
-};
+        return { API, APIHeaders };
+    }
+}
