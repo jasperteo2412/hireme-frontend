@@ -5,7 +5,8 @@
   "description": "Description for Hire Me Frontend",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "webpack serve --config webpack/webpack.dev.js --port 9000",
+    "start": "node build/static/main.js",
+    "start:local": "webpack serve --config webpack/webpack.dev.js --port 9000",
     "start:prod": "webpack serve --config webpack/webpack.prod.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "build:prod": "webpack --config webpack/webpack.prod.js",
