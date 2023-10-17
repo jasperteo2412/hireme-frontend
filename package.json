@@ -18,7 +18,7 @@
     "lint:fix": "eslint . --fix",
     "format:mac": "prettier --write 'src/**/*.{ts,tsx,css,json,js,jsx,less}'",
     "format:window": "prettier --write src/**/*.{ts,tsx,css,json,js,jsx,less}",
-    "prepare": "husky install"
+    "prepare": "npm install"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -56,7 +56,6 @@
     "eslint-plugin-react": "7.32.2",
     "eslint-webpack-plugin": "4.0.1",
     "fork-ts-checker-webpack-plugin": "8.0.0",
-    "generator-jhipster": "8.0.0-beta.2",
     "html-webpack-plugin": "5.5.3",
     "husky": "8.0.3",
     "identity-obj-proxy": "3.0.0",
@@ -113,7 +112,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.45.1",
-    "react-jhipster": "0.25.2",
     "react-loadable": "5.5.0",
     "react-redux": "8.1.1",
     "react-redux-loading-bar": "5.0.4",
