@@ -1,8 +1,47 @@
 import { Avatar, Button, Card, Descriptions, Divider, Rate, Space, Tag } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ListingCard = () => {
+interface Assignment {
+  assignmentId: number;
+  assignmentType: string;
+  subjectLevel: string;
+  subject: string;
+  title: string;
+  description: string;
+  location: string;
+  createdByUserId: string;
+  byUser: string;
+  tuitionDuration: string;
+  tuitionFrequencies: string[];
+  price: number;
+  status: string;
+  createdDateTime: string;
+  updatedDateTime: string;
+}
+
+interface ListingCardProps {
+  assignment: Assignment;
+}
+
+const ListingCard: React.FC<ListingCardProps> = ({ assignment }) => {
+  const {
+    title,
+    byUser,
+    description,
+    price,
+    tuitionFrequencies,
+    // Add other properties as needed
+  } = assignment;
+
+  const navigate = useNavigate();
+
+  const handleChatButtonClick = () => {
+    // Use navigate to go to the chat page
+    navigate('/chat'); // Replace '/chat' with the actual path to your chat page
+  };
+
   return (
     <div>
       <Card style={{ marginBottom: '20px' }}>
@@ -10,27 +49,31 @@ const ListingCard = () => {
 
         <div style={{ float: 'right' }}>
           Starting From:
-          <p style={{fontSize: '25px'}}>
-            <b>$20/hr</b>
+          <p style={{ fontSize: '25px' }}>
+            <b>${price}/hr</b>
           </p>
         </div>
 
-        <Meta 
-        style ={{paddingTop: '20px' }}
+        <Card.Meta
+          style={{ paddingTop: '20px' }}
           avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-          title="Person A"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum fringilla erat sed dictum. Etiam efficitur massa tortor, vel laoreet ante luctus nec. Cras convallis auctor lectus, a placerat mi commodo ac. Sed non vestibulum augue, ultrices consequat mi. In luctus ut mi egestas pretium. Vivamus aliquam velit ut dignissim vulputate. Nulla nisi eros, sollicitudin ac est id, pellentesque malesuada dui. Nulla eu euismod purus."
+          title={byUser}
+          description={description}
         />
         <Space style={{ paddingTop: '20px' }}>
-          <Tag color="blue">blue</Tag>
-          <Tag color="green">Green</Tag>
+          {tuitionFrequencies.map((frequency, index) => (
+            <Tag color="green" key={index}>
+              {frequency}
+            </Tag>
+          ))}
         </Space>
-        <Divider></Divider>
-
+        <Divider />
         <Button type="primary" style={{ float: 'right', marginLeft: '20px' }}>
           View Profile
         </Button>
-        <Button style={{ float: 'right' }}>Let's Chat</Button>
+        <Button onClick={handleChatButtonClick} style={{ float: 'right' }}>
+          Let's Chat
+        </Button>
       </Card>
     </div>
   );
