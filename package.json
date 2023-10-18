@@ -4,7 +4,6 @@
   "private": true,
   "description": "Description for Hire Me Frontend",
   "license": "UNLICENSED",
-  "homepage": "https://jasperteo2412.github.io/hireme-frontend/",
   "scripts": {
     "start": "webpack serve --config webpack/webpack.prod.js",
     "start:local": "webpack serve --config webpack/webpack.dev.js --port 9000",
