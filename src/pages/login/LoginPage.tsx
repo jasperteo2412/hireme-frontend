@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Alert, Button, Col, Form, Input, Layout, Row, message } from 'antd';
+import { Alert, Button, Card, Col, Form, Input, Layout, Row, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login-page.css';
@@ -61,7 +61,9 @@ const LoginPage: React.FC = () => {
   return (
     <Row>
       {contextHolder}
-      <Col xs={12} style={{ backgroundColor: 'black', backgroundImage: `url(${LoginImage})`}} />
+      <Col xs={12} style={{ backgroundColor: 'black'}}>
+        <img src={LoginImage} style={{height: "100%", width: "100%", objectFit: "contain"}}/>
+      </Col>
       <Col xs={12} style={{ padding: '20px' }}>
       {error ? (
         <Alert

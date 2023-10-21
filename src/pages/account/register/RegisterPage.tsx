@@ -47,7 +47,9 @@ const RegisterPage = () => {
   return (
     <Row>
       {contextHolder}
-      <Col xs={12} style={{ backgroundColor: 'black', backgroundImage: `url(${RegisterImage})`}} />
+      <Col xs={12} style={{ backgroundColor: 'black'}}>
+        <img src={RegisterImage} style={{height: "100%", width: "100%", objectFit: "contain"}}/>
+      </Col>
       <Col xs={12} style={{ padding: '20px' }}>
       {error ? (
         <Alert
