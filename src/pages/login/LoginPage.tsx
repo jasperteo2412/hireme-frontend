@@ -5,7 +5,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login-page.css';
 import { useNavigate } from 'react-router-dom';
 import { postSignIn } from '../../apis/UserAPIs';
-import { useDispatch } from 'react-redux';
+
+import LoginImage from '../../images/login.jpeg';
 
 interface LoginFormProps {
   onSubmit: (values: { username: string; password: string }) => void;
@@ -39,7 +40,6 @@ const LoginPage: React.FC = () => {
       if (data.status === 200) {
         messageApi.info({ content: 'Successfully logged in!' });
         console.log("USER data.res: ", data.res);
-        // dispatch(authenticateUserService(data.res));
         sessionStorage.setItem("TOKEN", data.res.accessToken);
         sessionStorage.setItem("TOKEN-TYPE", data.res.tokenType);
         sessionStorage.setItem("USER-ID", data.res.username);
@@ -61,8 +61,8 @@ const LoginPage: React.FC = () => {
   return (
     <Row>
       {contextHolder}
-      <Col span={12} style={{ backgroundColor: 'black' }}></Col>
-      <Col span={12} style={{ padding: '20px' }}>
+      <Col xs={12} style={{ backgroundColor: 'black', backgroundImage: `url(${LoginImage})`}} />
+      <Col xs={12} style={{ padding: '20px' }}>
       {error ? (
         <Alert
           type="error"

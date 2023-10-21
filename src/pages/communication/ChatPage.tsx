@@ -7,6 +7,7 @@ import { Input, Button, List, message, Alert, Divider, Row, Col } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { postMessages, getMessages, updateMessageIndicator } from '../../apis/CommunicationAPIs';
 import { transformChatHistory } from '../../components/chat/utils/ChatDataFunctions';
+import ChatUserSearch from '../../components/chat/ChatUserSearch';
 
 const ChatPage = () => {
   const [currentUser] = useState('SYSTEM');
@@ -15,6 +16,8 @@ const ChatPage = () => {
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
   const [messageApi, contextHolder] = message.useMessage();
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [newUser, setNewUser] = useState("");
   const [error, setError] = useState(false);
   const [rawData, setRawData] = useState<any>([]);
   const [chats, setChats] = useState<any>([]);
@@ -86,6 +89,7 @@ const ChatPage = () => {
 
   function createChat(){
     //CALL USER API
+    setIsOpen(true);
   }
 
   function updateReadIndicator(){
@@ -117,6 +121,18 @@ const ChatPage = () => {
       setRefreshChat(false);
     }
   }, [refreshChat]);
+
+  useEffect(()=>{
+    if(newUser.length > 0){
+      const tempPeople: any = [...people, newUser];
+      setPeople(tempPeople);
+
+      //set delay for setState
+      setTimeout(()=>{
+        setSelectedPerson(newUser);
+      }, 1000);
+    }
+  }, [newUser]);
 
   useEffect(() => {
     if (chats !== undefined && chats !== null) {
@@ -174,7 +190,7 @@ const ChatPage = () => {
         console.log("READD: ", tempUnread);
       });
 
-      setPeople(tempPeople);
+      setPeople(tempPeople); 
       setUnreadCount(tempUnread);
     }
   }, [chats]);
@@ -208,8 +224,14 @@ const ChatPage = () => {
   }, [updateChats])
 
   return (
-    <div className="chat-container" style={{ display: 'flex' }}>
+    <div className="chat-container">
       {contextHolder}
+      <ChatUserSearch
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setNewUser={setNewUser}
+        messageApi={messageApi}
+      />
       <div className="people-list" style={{ width: '20%', borderRight: '1px solid #e8e8e8', padding: '16px' }}>
         <Row>
           <Col xs={20}>
@@ -219,6 +241,7 @@ const ChatPage = () => {
             <PlusCircleOutlined onClick={createChat} style={{ fontSize: '24px' }}/>
           </Col>
         </Row>
+        <Divider/>
         <List
           dataSource={people}
           renderItem={(person: any) => (

@@ -31,6 +31,7 @@ export const apis = () => {
         //USER
         const USER_SIGN_IN_URL = "/api/auth/signin";
         const USER_SIGN_UP_URL = "/api/auth/signup";
+        const USER_SEARCH_URL = "/v1/users/list";
 
         const API = {
             assignmentUrl: BASE_URL+assignmentPaymentRecommendation+ASSIGNMENT_URL,
@@ -40,6 +41,7 @@ export const apis = () => {
             recommendationsUrl: BASE_URL+assignmentPaymentRecommendation+RECOMMENDATIONS_URL,
             userSignInUrl: BASE_URL+userCommunication+USER_SIGN_IN_URL,
             userSignUpUrl: BASE_URL+userCommunication+USER_SIGN_UP_URL,
+            userSearchUrl: BASE_URL+userCommunication+USER_SEARCH_URL,
 
         }
         
@@ -71,6 +73,7 @@ export const apis = () => {
         //USER
         const USER_SIGN_IN_URL = "/api/auth/signin";
         const USER_SIGN_UP_URL = "/api/auth/signup";
+        const USER_SEARCH_URL = "/v1/users/list";
 
         // For testing messaging
         const APIHeaders = {
@@ -85,6 +88,7 @@ export const apis = () => {
             recommendationsUrl: assignmentPaymentRecommendation_URL+RECOMMENDATIONS_URL,
             userSignInUrl: userCommunication_URL+USER_SIGN_IN_URL,
             userSignUpUrl: userCommunication_URL+USER_SIGN_UP_URL,
+            userSearchUrl: userCommunication_URL+USER_SEARCH_URL,
         }
 
         return { API, APIHeaders };

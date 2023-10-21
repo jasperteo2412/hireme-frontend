@@ -7,6 +7,7 @@ import ChatPage from "./pages/communication/ChatPage";
 import HomePage from "./pages/home/homePage";
 import LoginPage from "./pages/login/LoginPage";
 import PageNotFound from "./pages/error/PageNotFound";
+import Logout from "./pages/login/Logout";
 
 const loading = <div>loading ...</div>;
 
@@ -80,6 +81,16 @@ const AppRoutes = () => {
               <Navigate to={"/login"} />
             ) : (
               <ChatPage />
+            )
+          }
+        />
+        <Route
+          path="logout"
+          element={
+            userRole !== AUTHORITIES.USER && userRole !== AUTHORITIES.ADMIN ? (
+              <Navigate to={"/login"} />
+            ) : (
+              <Logout/>
             )
           }
         />

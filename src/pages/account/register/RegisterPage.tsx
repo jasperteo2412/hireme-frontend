@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { postSignUp } from '../../../apis/UserAPIs';
 import { AUTHORITIES } from '../../../config/constants';
 
+import RegisterImage from '../../../images/register.jpg';
+
 const RegisterPage = () => {
 
   const navigate = useNavigate();
@@ -45,8 +47,8 @@ const RegisterPage = () => {
   return (
     <Row>
       {contextHolder}
-      <Col span={12} style={{ backgroundColor: 'black' }}></Col>
-      <Col span={12} style={{ padding: '20px' }}>
+      <Col xs={12} style={{ backgroundColor: 'black', backgroundImage: `url(${RegisterImage})`}} />
+      <Col xs={12} style={{ padding: '20px' }}>
       {error ? (
         <Alert
           type="error"

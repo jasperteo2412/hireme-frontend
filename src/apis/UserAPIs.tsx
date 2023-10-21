@@ -2,7 +2,7 @@
 import axios from "axios";
 import { apis } from "./apiConfig";
 
-const APIConfig = apis();
+const APIConfig = apis()!;
 
 export const postSignIn = async (data: any) => {
 
@@ -44,6 +44,29 @@ export const postSignUp = async (data: any) => {
     .catch((error: any) => {
         console.log("error: ", error);
         res = error.response.data.message;
+        resError = error.message;
+    })
+
+    return { res, status, resError };
+};
+
+export const getSearchUsers = async (searchUser: string) => {
+
+    let res;
+    let status;
+    let resError;
+
+    await axios.get(APIConfig.API.userSearchUrl, {
+        params: {
+            search: searchUser
+        },
+        headers: APIConfig.APIHeaders
+    })
+    .then((response: any) => {
+        res = response.data.data;
+        status = response.data.status;
+    })
+    .catch((error: any) => {
         resError = error.message;
     })
 

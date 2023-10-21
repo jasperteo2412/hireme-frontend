@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+.chat-container {
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 0, 0, 0.05);
+}
+
 .chat {
   --rad: 20px;
   --rad-sm: 3px;

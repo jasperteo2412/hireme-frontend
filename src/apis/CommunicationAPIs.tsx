@@ -2,7 +2,7 @@
 import axios from "axios";
 import { apis } from "./apiConfig";
 
-const APIConfig = apis();
+const APIConfig = apis()!;
 
 export const getMessages = async () => {
 
