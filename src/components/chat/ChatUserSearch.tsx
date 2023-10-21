@@ -48,6 +48,7 @@ export default function ChatUserSearch(props: any) {
 
   return (
     <Modal 
+        title={"Start New Chat"}
         open={isOpen}
         onOk={addUser} 
         width={400}
