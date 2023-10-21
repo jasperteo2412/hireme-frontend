@@ -10,7 +10,7 @@ import { transformChatHistory } from '../../components/chat/utils/ChatDataFuncti
 import ChatUserSearch from '../../components/chat/ChatUserSearch';
 
 const ChatPage = () => {
-  const [currentUser] = useState('SYSTEM');
+  const [currentUser] = useState(sessionStorage.getItem("USER-ID"));
   const [chatMessage, setChatMessage] = useState('');
   // const [chatHistory, setChatHistory] = useState<{ [key: string]: string[] }>({});
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
