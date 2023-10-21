@@ -340,6 +340,6 @@ a.anchor-btn:hover {
   position: fixed;
   padding: 10px;
   background-color: white;
-  z-index: 10000;
+  z-index: 1;
   box-shadow: 0 2px 2px -2px lightgray;
 }

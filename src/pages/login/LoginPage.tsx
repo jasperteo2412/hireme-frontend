@@ -6,7 +6,7 @@ import './login-page.css';
 import { useNavigate } from 'react-router-dom';
 import { postSignIn } from '../../apis/UserAPIs';
 
-import LoginImage from '../../images/login.jpeg';
+import LoginImage from '../../images/login.jpg';
 
 interface LoginFormProps {
   onSubmit: (values: { username: string; password: string }) => void;
