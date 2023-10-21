@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { axiosInterceptors } from './apis/axiosConfig';
 import AppRoutes from './routes';
 import { Navbar } from './components/Navbar';
+import Footer from './components/Footer';
 
 export const App = () => {
 
@@ -24,6 +25,7 @@ export const App = () => {
           <AppRoutes />
         </div>
       </div>
+      <Footer showItems={loggedIn} />
     </BrowserRouter>
   );
 };

@@ -343,3 +343,26 @@ a.anchor-btn:hover {
   z-index: 1;
   box-shadow: 0 2px 2px -2px lightgray;
 }
+
+.footer-hireme {
+  height: 90px;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  z-index: 1;
+  box-shadow: 0 2px 2px -2px lightgray;
+}
+
+.footer-logo{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer-hireme > .ant-col{
+  height: 80px;
+}
+
+.ant-layout-sider-trigger{
+  bottom: 100px !important;
+}

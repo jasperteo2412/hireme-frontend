@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Alert, Button, Card, Col, Form, Input, Layout, Row, message } from 'antd';
+import { Alert, Button, Card, Col, Form, Input, Layout, Row, Spin, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login-page.css';
@@ -19,6 +19,7 @@ const LoginPage: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [error, setError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLoginSubmit = (values: { username: string; password: string }) => {
     // Handle the login logic here
@@ -31,6 +32,8 @@ const LoginPage: React.FC = () => {
   };
 
   function signInApi(username: string, password: string) {
+    setLoading(true);
+
     const requestBody = {
       username,
       password,
@@ -46,6 +49,7 @@ const LoginPage: React.FC = () => {
         sessionStorage.setItem("ROLES", data.res.roles);
         setLoggedIn(true);
       } else {
+        setLoading(false);
         setError(true);
         messageApi.error({ content: data.resError+": "+data.res });
       }
@@ -59,45 +63,47 @@ const LoginPage: React.FC = () => {
   }, [[loggedIn]])
 
   return (
-    <Row>
-      {contextHolder}
-      <Col xs={12} style={{ backgroundColor: 'black'}}>
-        <img src={LoginImage} style={{height: "100%", width: "100%", objectFit: "contain"}}/>
-      </Col>
-      <Col xs={12} style={{ padding: '20px' }}>
-      {error ? (
-        <Alert
-          type="error"
-          message={'Unable to log in'}
-          description={'An error has ocurred while trying to login, please try again later.'}
-          showIcon
-          closable
-        />
-      ) : undefined}
-        <div className="login-container" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Form name="login-form" onFinish={handleLoginSubmit}>
-            <h2 className="text-title">
-              <p>Welcome!</p>
-              It’s really nice to see you
-            </h2>
-            <Form.Item name="username" rules={[{ required: true, message: 'Please enter your username!' }]}>
-              <Input prefix={<UserOutlined />} placeholder="Username" />
-            </Form.Item>
-            <Form.Item name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
-              <Input.Password prefix={<LockOutlined />} placeholder="Password" />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit" block>
-                Log in
-              </Button>
-              <Button type="link" onClick={handleRegister}>
-                Join us Today!
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
-      </Col>
-    </Row>
+    <Spin tip={"Logging in..."} spinning={loading}>
+      <Row>
+        {contextHolder}
+        <Col xs={12} style={{ backgroundColor: 'black'}}>
+          <img src={LoginImage} style={{height: "100%", width: "100%", objectFit: "contain"}}/>
+        </Col>
+        <Col xs={12} style={{ padding: '20px' }}>
+        {error ? (
+          <Alert
+            type="error"
+            message={'Unable to log in'}
+            description={'An error has ocurred while trying to login, please try again later.'}
+            showIcon
+            closable
+          />
+        ) : undefined}
+          <div className="login-container" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Form name="login-form" onFinish={handleLoginSubmit}>
+              <h2 className="text-title">
+                <p>Welcome!</p>
+                It’s really nice to see you
+              </h2>
+              <Form.Item name="username" rules={[{ required: true, message: 'Please enter your username!' }]}>
+                <Input prefix={<UserOutlined />} placeholder="Username" />
+              </Form.Item>
+              <Form.Item name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
+                <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" block>
+                  Log in
+                </Button>
+                <Button type="link" onClick={handleRegister}>
+                  Join us Today!
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Spin>
   );
 };
 

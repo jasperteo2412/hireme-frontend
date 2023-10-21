@@ -13,7 +13,7 @@ export function Navbar(props: any){
     return(
         <Row className='navbar'>
             <Col xs={8}>
-                <img src={Logo} style={{height: "40px"}}/>
+                <img src={Logo} style={{height: "40px"}} onClick={()=>navigate("/homepage")}/>
             </Col>
             <Col xs={16} style={{display: 'flex', justifyContent: 'flex-end'}}>
                 <Space direction="horizontal" size="middle" style={{ display: 'flex', visibility: showItems? 'visible' : 'hidden' }}>
@@ -22,6 +22,9 @@ export function Navbar(props: any){
                     </Button>
                     <Button type="link" onClick={()=> navigate("/chat")}>
                         Messages
+                    </Button>
+                    <Button type="link" onClick={()=>navigate("/profile")}>
+                        Profile
                     </Button>
                     <Button type="link" onClick={()=>navigate("/logout")}>
                         Logout
