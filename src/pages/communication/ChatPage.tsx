@@ -115,13 +115,15 @@ const ChatPage = () => {
   }
 
   useEffect(() => {
-    //check if coming from other pages
-    if(sessionStorage.getItem("chatId") !== null){
-      const userChat: any = sessionStorage.getItem("chatId");
-      setNewUser(userChat);
-      sessionStorage.removeItem("chatId");
-    }
     getChats();
+    setTimeout(()=>{
+      //check if coming from other pages
+      if(sessionStorage.getItem("chatId") !== null){
+        const userChat: any = sessionStorage.getItem("chatId");
+        setNewUser(userChat);
+        sessionStorage.removeItem("chatId");
+      }
+    }, 1000);
     setInterval(() => {
       getChats();
       setUpdateChats([]);

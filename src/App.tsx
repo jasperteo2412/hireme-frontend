@@ -24,7 +24,7 @@ export const App = () => {
       <Navbar showItems={loggedIn} />
       <div className="app-container" style={{ paddingTop, paddingBottom: "80px" }}>
         <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-        <div className="container-fluid view-container" id="app-view-container">
+        <div className="container-fluid view-container" id="app-view-container" style={{minHeight: "100vh"}}>
           <AppRoutes />
         </div>
       </div>
