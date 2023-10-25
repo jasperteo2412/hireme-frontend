@@ -107,6 +107,10 @@ const ChatPage = () => {
   }
 
   useEffect(() => {
+    sessionStorage.setItem("chatId", "zhenghui");
+    if(sessionStorage.getItem("chatId") !== null){
+      setNewUser("")
+    }
     getChats();
     setInterval(() => {
       getChats();
@@ -124,8 +128,12 @@ const ChatPage = () => {
 
   useEffect(()=>{
     if(newUser.length > 0){
-      const tempPeople: any = [...people, newUser];
-      setPeople(tempPeople);
+      const tempPeople: any = [...people];
+
+      if(!tempPeople.includes(newUser)){
+        tempPeople.push(newUser);
+        setPeople(tempPeople);
+      }
 
       //set delay for setState
       setTimeout(()=>{

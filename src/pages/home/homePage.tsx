@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import type { MenuProps, RadioChangeEvent } from 'antd';
+import { Breadcrumb, Button, Checkbox, DatePicker, Form, Input, Layout, Menu, Modal, Radio, Select, Space, theme } from 'antd';
 import CustomCard from '../../components/card/CustomCard';
 import ListingCard from '../../components/card/ListingCard';
 import axios from 'axios';
+import { apis } from '../../apis/apiConfig';
+
+
+const APIConfig = apis();
 
 const { Header, Content, Footer, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>['items'][number];
 
 interface Assignment {
   assignmentId: number;
@@ -28,23 +31,6 @@ interface Assignment {
   updatedDateTime: string;
 }
 
-function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[]): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [getItem('Tom', '3'), getItem('Bill', '4'), getItem('Alex', '5')]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-];
-
 const homePage: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -52,12 +38,35 @@ const homePage: React.FC = () => {
   } = theme.useToken();
 
   const [jsonData, setJsonData] = useState<Assignment[]>([]); // State to store JSON data
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm(); // Create a form instance
+  const [value, setValue] = useState("");
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    form.resetFields();
+
+  };
+
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
 
   const fetchData = async () => {
+    console.log("URL : ",APIConfig?.API.assignmentUrl)
     await axios
-      .get('API_ENDPOINT')
+      .post(APIConfig!.API.assignmentUrl + '/get-all', {
+        headers: {"USER-ID" : "zhenghui"}
+        // headers :  sessionStorage.getItem("USER-ID") 
+      })
       .then(response => {
         const fetchedData: Assignment[] = response.data;
+        console.log("DATA :",fetchData)
         setJsonData(fetchedData);
       })
       .catch(error => {
@@ -155,8 +164,35 @@ const homePage: React.FC = () => {
     },
   ];
 
+  const handleCreate = () => {
+    form
+      .validateFields()
+      .then((values: Assignment) => {
+        console.log('Form Values:', values); // Log the form values
+        const jsonData = JSON.stringify(values);
+          // Send a POST request with Axios
+      axios
+      .post(APIConfig!.API.assignmentUrl, jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        // Handle the response as needed
+        console.log('Assignment created:', response.data);
+        form.resetFields();
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Error creating assignment:', error);
+      });
+        // onCreate(values);
+        form.resetFields();
+      });
+  };
+
   useEffect(() => {
-    setJsonData(dummyData); // Set the JSON data in the state
+    // setJsonData(dummyData); // Set the JSON data in the state
     fetchData();
   }, []);
 
@@ -164,24 +200,82 @@ const homePage: React.FC = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ padding: 0, background: colorBgContainer }} >
+        <Button
+          type="primary"
+          style={{ float: "right", margin: "20px"}}
+          onClick={showModal}
+        >
+          Post Assignment
+        </Button>
+        </Header>
         <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
           <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
             {jsonData.map(assignment => (
               <ListingCard key={assignment.assignmentId} assignment={assignment} />
             ))}
           </div>
+          <Modal
+        title="Add Review"
+        open={isModalVisible}
+        onOk={handleCreate}
+        onCancel={handleCancel}
+    >
+      <Form form={form} layout="vertical">
+        <Form.Item name="assignmentType" label="Assignment Type">
+          <Select
+            defaultValue="PROVIDING_TUITION"
+            options={[
+              { value: 'PROVIDING_TUITION', label: 'Providing Tuition' },
+            ]}>
+
+          </Select>
+        </Form.Item>
+        <Form.Item name="subjectLevel" label="Subject Level">
+          <Input />
+        </Form.Item>
+        <Form.Item name="subject" label="Subject">
+          <Input />
+        </Form.Item>
+        <Form.Item name="title" label="Title">
+          <Input />
+        </Form.Item>
+        <Form.Item name="description" label="Description">
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item name="location" label="Location">
+          <Input />
+        </Form.Item>
+        <Form.Item name="tuitionDuration" label="Tuition Duration">
+          <Input />
+        </Form.Item>
+        <Form.Item name="tuitionFrequencies" label="Tuition Frequencies">
+        <Checkbox.Group>
+            <Checkbox value="MONDAY">Monday</Checkbox>
+            <Checkbox value="TUESDAY">Tuesday</Checkbox>
+            <Checkbox value="WEDNESDAY">Wednesday</Checkbox>
+            <Checkbox value="THURSDAY">Thursday</Checkbox>
+            <Checkbox value="FRIDAY">Friday</Checkbox>
+            <Checkbox value="SATURDAY">Saturday</Checkbox>
+            <Checkbox value="SUNDAY">Sunday</Checkbox>
+          </Checkbox.Group>
+        </Form.Item>
+        <Form.Item name="price" label="Price">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item name="createdDateTime" label="Created Date and Time">
+          <DatePicker showTime />
+        </Form.Item>
+      </Form>
+    </Modal>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
       </Layout>
     </Layout>
+
+    
   );
 };
 

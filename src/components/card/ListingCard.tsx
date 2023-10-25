@@ -28,6 +28,7 @@ interface ListingCardProps {
 const ListingCard: React.FC<ListingCardProps> = ({ assignment }) => {
   const {
     title,
+    assignmentId,
     byUser,
     description,
     price,
@@ -36,11 +37,19 @@ const ListingCard: React.FC<ListingCardProps> = ({ assignment }) => {
   } = assignment;
 
   const navigate = useNavigate();
+  
 
   const handleChatButtonClick = () => {
     // Use navigate to go to the chat page
-    navigate('/chat'); // Replace '/chat' with the actual path to your chat page
+    sessionStorage.setItem('chatId', 'zhenghui')
+    navigate('/chat')
   };
+  
+  const handleProfileButtonClick = (assignmentId : any) =>{
+    // navigate('/profile')
+    localStorage.setItem('assignmentID', '2')
+    navigate(`/profile/`);
+  }
 
   return (
     <div>
@@ -68,7 +77,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ assignment }) => {
           ))}
         </Space>
         <Divider />
-        <Button type="primary" style={{ float: 'right', marginLeft: '20px' }}>
+        <Button type="primary"  onClick={() => handleProfileButtonClick(assignmentId)} style={{ float: 'right', marginLeft: '20px' }}>
           View Profile
         </Button>
         <Button onClick={handleChatButtonClick} style={{ float: 'right' }}>
