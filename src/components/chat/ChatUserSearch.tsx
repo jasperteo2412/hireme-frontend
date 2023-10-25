@@ -7,7 +7,8 @@ export default function ChatUserSearch(props: any) {
     isOpen, 
     setIsOpen,
     setNewUser,
-    messageApi
+    messageApi,
+    currentUser
 } = props;
 
   const [form] = Form.useForm();
@@ -18,7 +19,7 @@ export default function ChatUserSearch(props: any) {
   function searchUser(value: string) {
     getSearchUsers(value).then((data: any) => {
       if (data.status === 200) {
-        const processedResults = data.res.map((item: any, index: any)=>{
+        const processedResults = data.res.filter((item: any) => item.userName !== currentUser).map((item: any, index: any)=>{
             return{
                 value: item.userName,
                 label: item.userName

@@ -7,6 +7,8 @@ import ChatPage from "./pages/communication/ChatPage";
 import HomePage from "./pages/home/homePage";
 import LoginPage from "./pages/login/LoginPage";
 import PageNotFound from "./pages/error/PageNotFound";
+import ProfilePage from "./pages/profile/profile";
+import PaymentPage from "./pages/payment/payment";
 import Logout from "./pages/login/Logout";
 
 const loading = <div>loading ...</div>;
@@ -61,11 +63,26 @@ const AppRoutes = () => {
         <Route
           path="homepage"
           element={
-            userRole !== AUTHORITIES.USER && userRole !== AUTHORITIES.ADMIN ? (
-              <Navigate to={"/login"} />
-            ) : (
-              <HomePage />
-            )
+            // userRole !== AUTHORITIES.USER && userRole !== AUTHORITIES.ADMIN ? (
+            //   <Navigate to={"/login"} />
+            // ) : (
+            //   <HomePage />
+            // )
+            <HomePage />
+          }
+        />
+        <Route
+          path="profile"
+          element={
+        
+            <ProfilePage />
+          }
+        />
+         <Route
+          path="payment"
+          element={
+        
+            <PaymentPage />
           }
         />
         {/* <Route path="logout" element={

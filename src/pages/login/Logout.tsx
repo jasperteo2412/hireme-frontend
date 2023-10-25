@@ -7,7 +7,7 @@ export default function Logout(){
         sessionStorage.clear();
         setTimeout(()=>{
             window.location.reload();
-        }, 3000);
+        }, 2000);
     }, []);
     
     return(
