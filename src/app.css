@@ -351,7 +351,7 @@ a.anchor-btn:hover {
   background-color: white;
   z-index: 1;
   box-shadow: 0 2px 2px -2px lightgray;
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 

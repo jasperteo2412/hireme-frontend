@@ -3,7 +3,7 @@
 import '../../chat.css'
 import Moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Input, Button, List, message, Alert, Divider, Row, Col } from 'antd';
+import { Input, Button, List, message, Alert, Divider, Row, Col, Spin } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { postMessages, getMessages, updateMessageIndicator } from '../../apis/CommunicationAPIs';
 import { transformChatHistory } from '../../components/chat/utils/ChatDataFunctions';
@@ -18,13 +18,16 @@ const ChatPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [newUser, setNewUser] = useState("");
+  
   const [error, setError] = useState(false);
   const [rawData, setRawData] = useState<any>([]);
   const [chats, setChats] = useState<any>([]);
   const [updateChats, setUpdateChats] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [unreadCount, setUnreadCount] = useState([]);
   const [people, setPeople] = useState<any>([]);
+  const [newPeople, setNewPeople] = useState<any>([]);
   const [refreshChat, setRefreshChat] = useState(false);
 
   const handleSendMessage = () => {
@@ -40,6 +43,11 @@ const ChatPage = () => {
           messageApi.info({ content: 'Message successfully sent!' });
           setChatMessage('');
           setRefreshChat(true);
+          if(newPeople.length > 0){
+            const tempPeople: any = [...people, ...newPeople];
+            setPeople(tempPeople);
+            setNewPeople([]);
+          }
         } else {
           messageApi.error({ content: 'An error has occurred, unable to send message' });
         }
@@ -107,9 +115,11 @@ const ChatPage = () => {
   }
 
   useEffect(() => {
-    sessionStorage.setItem("chatId", "zhenghui");
+    //check if coming from other pages
     if(sessionStorage.getItem("chatId") !== null){
-      setNewUser("")
+      const userChat: any = sessionStorage.getItem("chatId");
+      setNewUser(userChat);
+      sessionStorage.removeItem("chatId");
     }
     getChats();
     setInterval(() => {
@@ -128,16 +138,20 @@ const ChatPage = () => {
 
   useEffect(()=>{
     if(newUser.length > 0){
+      setIsLoading(true);
       const tempPeople: any = [...people];
 
       if(!tempPeople.includes(newUser)){
-        tempPeople.push(newUser);
-        setPeople(tempPeople);
+        const addUser = [newUser];
+        console.log("addUser: ", addUser);
+        setNewPeople(addUser);
       }
 
       //set delay for setState
       setTimeout(()=>{
         setSelectedPerson(newUser);
+        console.log("newUser: ", newUser);
+        setIsLoading(false);
       }, 1000);
     }
   }, [newUser]);
@@ -232,76 +246,79 @@ const ChatPage = () => {
   }, [updateChats])
 
   return (
-    <div className="chat-container">
-      {contextHolder}
-      <ChatUserSearch
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        setNewUser={setNewUser}
-        messageApi={messageApi}
-      />
-      <div className="people-list" style={{ width: '20%', borderRight: '1px solid #e8e8e8', padding: '16px' }}>
-        <Row>
-          <Col xs={20}>
-            <h3>Users</h3>
-          </Col>
-          <Col xs={4}>
-            <PlusCircleOutlined onClick={createChat} style={{ fontSize: '24px' }}/>
-          </Col>
-        </Row>
-        <Divider/>
-        <List
-          dataSource={people}
-          renderItem={(person: any) => (
-            <List.Item
-              onClick={() => setSelectedPerson(person)}
-              style={{ cursor: 'pointer', backgroundColor: person === selectedPerson ? '#f0f0f0' : 'white', padding: '10px' }}
-            >
-              <Row style={{width: '100%', alignItems: 'center'}}>
-                <Col xs={20}>
-                  {person}
-                </Col>
-                <Col xs={4}>
-                  {
-                    unreadCount.map((object, index) => {
-                      return(
-                        <div key={index} className={'notification-circle'} style={{display: object[person] > 0? undefined: 'none'}}>
-                          {object[person]}
-                        </div>
-                      );
-                    })
-                  }
-                </Col>
-              </Row>
-            </List.Item>
-          )}
+    <Spin tip={"Loading..."} spinning={isLoading}>
+      <div className="chat-container">
+        {contextHolder}
+        <ChatUserSearch
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          setNewUser={setNewUser}
+          messageApi={messageApi}
+          currentUser={currentUser}
         />
-      </div>
-      <div className="chat-content chat" style={{ width: '80%', padding: '16px' }}>
-        {error ? (
-          <Alert
-            type="error"
-            message={'Unable to retrieve messages'}
-            description={'An error has ocurred while trying to retrieve messages, please try again later.'}
-            showIcon
+        <div className="people-list" style={{ width: '20%', borderRight: '1px solid #e8e8e8', padding: '16px' }}>
+          <Row>
+            <Col xs={20}>
+              <h3>Users</h3>
+            </Col>
+            <Col xs={4}>
+              <PlusCircleOutlined onClick={createChat} style={{ fontSize: '24px' }}/>
+            </Col>
+          </Row>
+          <Divider/>
+          <List
+            dataSource={newPeople.length > 0? [...people, ...newPeople]: people}
+            renderItem={(person: any) => (
+              <List.Item
+                onClick={() => setSelectedPerson(person)}
+                style={{ cursor: 'pointer', backgroundColor: person === selectedPerson ? '#f0f0f0' : 'white', padding: '10px' }}
+              >
+                <Row style={{width: '100%', alignItems: 'center'}}>
+                  <Col xs={20}>
+                    {person}
+                  </Col>
+                  <Col xs={4}>
+                    {
+                      unreadCount.map((object, index) => {
+                        return(
+                          <div key={index} className={'notification-circle'} style={{display: object[person] > 0? undefined: 'none'}}>
+                            {object[person]}
+                          </div>
+                        );
+                      })
+                    }
+                  </Col>
+                </Row>
+              </List.Item>
+            )}
           />
-        ) : undefined}
-        <h2 style={{marginTop: '10px'}}>Chats</h2>
-        <Divider />
-        {renderMessages()}
-        <div className="chat-input" style={{display: selectedPerson? undefined: 'none'}}>
-          <Input
-            placeholder="Type your message..."
-            style={{ margin: '5px' }}
-            value={chatMessage}
-            onChange={e => setChatMessage(e.target.value)}
-          />
-          <Button type="primary" onClick={handleSendMessage} style={{ margin: '5px' }}>
-            Send
-          </Button>
+        </div>
+        <div className="chat-content chat" style={{ width: '80%', padding: '16px' }}>
+          {error ? (
+            <Alert
+              type="error"
+              message={'Unable to retrieve messages'}
+              description={'An error has ocurred while trying to retrieve messages, please try again later.'}
+              showIcon
+            />
+          ) : undefined}
+          <h2 style={{marginTop: '10px'}}>Chats</h2>
+          <Divider />
+          {renderMessages()}
+          <div className="chat-input" style={{display: selectedPerson? undefined: 'none'}}>
+            <Input
+              placeholder="Type your message..."
+              style={{ margin: '5px' }}
+              value={chatMessage}
+              onChange={e => setChatMessage(e.target.value)}
+            />
+            <Button type="primary" onClick={handleSendMessage} style={{ margin: '5px' }}>
+              Send
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 

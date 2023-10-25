@@ -60,7 +60,7 @@ const homePage: React.FC = () => {
   const fetchData = async () => {
     console.log("URL : ",APIConfig?.API.assignmentUrl)
     await axios
-      .post(APIConfig!.API.assignmentUrl + '/get-all', {
+      .post(APIConfig!.API.assignmentUrl + '/get-all', null, {
         headers: {"USER-ID" : "zhenghui"}
         // headers :  sessionStorage.getItem("USER-ID") 
       })
