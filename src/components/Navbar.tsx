@@ -23,9 +23,9 @@ export function Navbar(props: any){
                     <Button type="link" onClick={()=> navigate("/chat")}>
                         Messages
                     </Button>
-                    <Button type="link" onClick={()=>navigate("/profile")}>
+                    {/* <Button type="link" onClick={()=>navigate("/profile")}>
                         Profile
-                    </Button>
+                    </Button> */}
                     <Button type="link" onClick={()=>navigate("/logout")}>
                         Logout
                     </Button>
