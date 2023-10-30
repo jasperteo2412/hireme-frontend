@@ -23,7 +23,7 @@ export const apis = () => {
         const COMMUNICATION_CHECK_URL = "/v1/messages/check";
 
         // PAYMENTS
-        const PAYMENTS_URL = "/payments";
+        const PAYMENTS_URL = "/api/payments";
 
         // RECOMMENDATIONS
         const RECOMMENDATIONS_URL = "/recommendations"+ASSIGNMENT_URL;
@@ -32,6 +32,8 @@ export const apis = () => {
         const USER_SIGN_IN_URL = "/api/auth/signin";
         const USER_SIGN_UP_URL = "/api/auth/signup";
         const USER_SEARCH_URL = "/v1/users/list";
+        const USER_REVIEW_URL = "/review";
+
 
         const API = {
             assignmentUrl: BASE_URL+assignmentPaymentRecommendation+ASSIGNMENT_URL,
@@ -42,6 +44,8 @@ export const apis = () => {
             userSignInUrl: BASE_URL+userCommunication+USER_SIGN_IN_URL,
             userSignUpUrl: BASE_URL+userCommunication+USER_SIGN_UP_URL,
             userSearchUrl: BASE_URL+userCommunication+USER_SEARCH_URL,
+            userReviewUrl: BASE_URL+userCommunication+USER_REVIEW_URL,
+            
 
         }
         
@@ -65,7 +69,7 @@ export const apis = () => {
         const COMMUNICATION_CHECK_URL = "/v1/messages/check";
 
         // PAYMENTS
-        const PAYMENTS_URL = "/payments";
+        const PAYMENTS_URL = "/api/payments";
 
         // RECOMMENDATIONS
         const RECOMMENDATIONS_URL = "/recommendations"+ASSIGNMENT_URL;
@@ -74,6 +78,7 @@ export const apis = () => {
         const USER_SIGN_IN_URL = "/api/auth/signin";
         const USER_SIGN_UP_URL = "/api/auth/signup";
         const USER_SEARCH_URL = "/v1/users/list";
+        const USER_REVIEW_URL = "/review";
 
         // For testing messaging
         const APIHeaders = {
@@ -89,6 +94,7 @@ export const apis = () => {
             userSignInUrl: userCommunication_URL+USER_SIGN_IN_URL,
             userSignUpUrl: userCommunication_URL+USER_SIGN_UP_URL,
             userSearchUrl: userCommunication_URL+USER_SEARCH_URL,
+            userReviewUrl: userCommunication_URL+USER_REVIEW_URL,
         }
 
         return { API, APIHeaders };

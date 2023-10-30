@@ -9,8 +9,8 @@ export const getAssignments = async () => {
     let status;
     let resError;
 
-    await axios.get(APIConfig.API.assignmentUrl, {
-        headers: APIConfig.APIHeaders
+    await axios.get(APIConfig!.API.assignmentUrl, {
+        headers: APIConfig!.APIHeaders
     })
     .then((response: any) => {
         res = response.data.data;

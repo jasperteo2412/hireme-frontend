@@ -58,7 +58,7 @@ const homePage: React.FC = () => {
   };
 
   const fetchData = async () => {
-    console.log("URL : ",APIConfig?.API.assignmentUrl)
+    console.log("URL : ", APIConfig?.API.assignmentUrl)
     await axios
       .post(APIConfig!.API.assignmentUrl + '/get-all', null, {
         headers: {"USER-ID" : "zhenghui"}
@@ -198,7 +198,7 @@ const homePage: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
+      <Sider>
         <div className="demo-logo-vertical" />
       </Sider>
       <Layout>
@@ -229,6 +229,7 @@ const homePage: React.FC = () => {
             defaultValue="PROVIDING_TUITION"
             options={[
               { value: 'PROVIDING_TUITION', label: 'Providing Tuition' },
+              { value: 'LOOKING_FOR_TUITION', label: 'Looking for Tuition' },
             ]}>
 
           </Select>
@@ -262,6 +263,7 @@ const homePage: React.FC = () => {
             <Checkbox value="SUNDAY">Sunday</Checkbox>
           </Checkbox.Group>
         </Form.Item>
+        
         <Form.Item name="price" label="Price">
           <Input type="number" />
         </Form.Item>
