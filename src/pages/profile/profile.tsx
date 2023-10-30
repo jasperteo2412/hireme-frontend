@@ -19,6 +19,9 @@ import Meta from "antd/es/card/Meta";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
+import { apis } from "../../apis/apiConfig";
+import RecommendationList from "../../components/card/RecommendationList";
+import { loadStripe } from "@stripe/stripe-js";
 
 interface Assignment {
   assignmentId: number;
@@ -51,6 +54,8 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
+
+const APIConfig = apis();
 
 const dummyData : Assignment[]= [
   {
@@ -86,8 +91,9 @@ const profile: React.FC = () => {
     setRating(value);
   };
   const [jsonData, setJsonData] = useState<Assignment[]>([]); // State to store JSON data
+  const [reviewData , setReviewData] = useState()
 
-
+  const stripePromise = loadStripe('pk_test_51NwEzzEjdrK5a8M75E48GFdH7AZQ4LftPzaLr1yoB22N6gsXtKeLPOS0KyEkBWrTqs5VENFM0PhvVVd6pqat7Hqw000XTDRHlE')
 
   const [form] = Form.useForm(); // Create a form instance
 
@@ -157,11 +163,47 @@ const profile: React.FC = () => {
     form.resetFields();
 
   };
-
+  const getPayment = async () => {
+    console.log("payment here")
+    const stripe = await stripePromise;
+    const requestBody ={
+      "productName" : "product",
+      "currency" : "sgd",
+      "successUrl" : "http://localhost:9000/success",
+      "cancelUrl" : "http://localhost:9000/cancel",
+      "amt" : "1000",
+      "assignmentId" : '2',
+      
+    }
+    await axios
+      // .post('http://localhost:8081/assignments/' + storedData)  
+      .post(APIConfig!.API.paymentsUrl + '/payment', requestBody, {   headers: {"USER-ID" : "zhenghui"}}) 
+      .then((response : any) => {
+        console.log(response);
+        console.log(response.data.id);
+        stripe?.redirectToCheckout({sessionId: response.data.id})
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+  const getRecommendation = async () => {
+    await axios
+      // .post('http://localhost:8081/assignments/' + storedData)  
+      .post(APIConfig!.API.recommendationsUrl + storedData) 
+      .then(response => {
+        const fetchedData: Assignment[] = response.data;
+        setJsonData(fetchedData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
   const getAssignmentsById = async () => {
     console.log("ID: ",storedData)
     await axios
-      .post('http://localhost:8081/assignments/' + storedData)  
+      // .post('http://localhost:8081/assignments/' + storedData)  
+      .post(APIConfig!.API.assignmentUrl + storedData) 
       .then(response => {
         const fetchedData: Assignment[] = response.data;
         setJsonData(fetchedData);
@@ -171,19 +213,30 @@ const profile: React.FC = () => {
       });
   }
 
-  const onFinish = (values: any) => {
-    const { name, review } = values;
-    console.log('Name:', name);
-    console.log('Review:', review);
+  const onFinish = () => {
+    form
+    .validateFields()
+    .then((values: any) => {
+      console.log('Form Values:', values); // Log the form values
+      const jsonData = JSON.stringify(values);
+        // Send a POST request with Axios
     axios
-    .post('http://localhost:5000/review/createTutorReview', values)
-    .then(response => {
-        console.log('Review added successfully:', response.data);
-        setIsModalVisible(false);
-        form.resetFields();
+    .post(APIConfig!.API.userReviewUrl, jsonData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .catch(error => {
-        console.error('Error adding review:', error);
+    .then((response) => {
+      // Handle the response as needed
+      console.log('Review created:', response.data);
+      form.resetFields();
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error('Error creating review:', error);
+    });
+      // onCreate(values);
+      form.resetFields();
     });
     
   };
@@ -222,7 +275,7 @@ const profile: React.FC = () => {
        
 
         <Divider />
-        <Button type="primary" style={{ float: "right", marginLeft: "20px" }}>
+        <Button  onClick={getPayment} type="primary" style={{ float: "right", marginLeft: "20px" }}>
           Book Tutor
         </Button>
         <Button onClick={handleChatButtonClick} style={{ float: "right" }}>
@@ -274,7 +327,7 @@ const profile: React.FC = () => {
         onOk={onFinish}
         onCancel={handleCancel}
       >
-        <Form {...layout} name="reviewForm" form={form} onFinish={onFinish}>
+        <Form {...layout} name="reviewForm" form={form}>
           <Form.Item
             name="name"
             label="Name"

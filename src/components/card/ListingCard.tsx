@@ -41,7 +41,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ assignment }) => {
 
   const handleChatButtonClick = () => {
     // Use navigate to go to the chat page
-    sessionStorage.setItem('chatId', byUser);
+    sessionStorage.setItem('chatId', byUser)
     navigate('/chat')
   };
   
